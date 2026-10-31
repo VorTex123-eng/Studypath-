@@ -1,0 +1,148 @@
+/* Phase C prototype stylesheet.
+   Standalone (not imported by the app). Design tokens copied from the
+   app's css/styles.css: --paper, --card, --line, --forest, --teal,
+   --lime, --coral, --sky, --radius, --ink, --muted; Manrope + DM Mono. */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap");
+
+:root {
+  --paper: #f7f5ef;
+  --card: #fffefa;
+  --line: #dde3dc;
+  --forest: #27645d;
+  --teal: #027d7a;
+  --lime: #d6ec76;
+  --coral: #ef8b72;
+  --sky: #dff1ef;
+  --radius: 22px;
+  --ink: #14211f;
+  --muted: #66726f;
+}
+[data-theme="dark"] {
+  --paper: #101413;
+  --card: #171c1b;
+  --line: #2a332f;
+  --forest: #7fd1c4;
+  --teal: #2aa8a3;
+  --lime: #d6ec76;
+  --coral: #ef8b72;
+  --sky: #1d2a27;
+  --ink: #eef2ef;
+  --muted: #9aa8a3;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Manrope", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.mono { font-family: "DM Mono", monospace; }
+.muted { color: var(--muted); }
+.hidden { display: none !important; }
+.wrap { max-width: 1060px; margin: 0 auto; padding: 0 22px; }
+
+.demo-banner {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--forest); color: #fff;
+  padding: 10px 22px; font-size: 13px;
+}
+.demo-banner strong { font-weight: 800; }
+.demo-banner button {
+  margin-left: auto; background: transparent; border: 1px solid rgba(255,255,255,.4);
+  color: #fff; border-radius: 999px; width: 30px; height: 30px; cursor: pointer;
+}
+
+.page-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 20px; padding-top: 40px; padding-bottom: 24px; flex-wrap: wrap;
+}
+.eyebrow {
+  text-transform: uppercase; letter-spacing: .14em; font-size: 11px;
+  font-weight: 700; color: var(--teal); margin: 0 0 8px;
+}
+h1 { font-size: clamp(30px, 4.5vw, 44px); margin: 0 0 8px; letter-spacing: -0.02em; }
+h2 { font-size: 24px; margin: 0 0 8px; letter-spacing: -0.01em; }
+.lede { margin: 0; color: var(--muted); max-width: 52ch; }
+
+.btn {
+  appearance: none; border: none; cursor: pointer;
+  background: var(--teal); color: #fff; font: inherit; font-weight: 700; font-size: 14px;
+  padding: 11px 20px; border-radius: 999px; transition: transform .12s ease, filter .12s ease;
+}
+.btn:hover { filter: brightness(1.06); transform: translateY(-1px); }
+.btn.secondary { background: var(--sky); color: var(--forest); }
+.btn.danger { background: transparent; color: var(--coral); border: 1.5px solid var(--coral); }
+.btn.ghost { background: transparent; color: var(--teal); padding: 8px 4px; }
+.btn.back { margin-bottom: 16px; }
+
+.lib-meta { display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 13px; }
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 18px; padding-bottom: 60px;
+}
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px; display: flex; flex-direction: column; gap: 10px;
+  transition: transform .14s ease, box-shadow .14s ease;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -18px rgba(20,33,31,.35); }
+.card-top { display: flex; align-items: center; gap: 8px; }
+.kind-badge {
+  font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  background: var(--lime); color: var(--ink); border-radius: 999px; padding: 4px 10px;
+}
+.card h3 { margin: 0; font-size: 18px; letter-spacing: -0.01em; }
+.card-subject { margin: 0; font-size: 13px; color: var(--muted); }
+.card-foot {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: auto; padding-top: 8px; border-top: 1px dashed var(--line); font-size: 12px;
+}
+.card .open { color: var(--teal); font-weight: 700; background: none; border: none; cursor: pointer; font-size: 13px; padding: 0; }
+
+.empty {
+  text-align: center; padding: 70px 20px; border: 1.5px dashed var(--line);
+  border-radius: var(--radius); background: var(--card);
+}
+.empty-title { font-size: 20px; font-weight: 800; margin: 0 0 6px; }
+
+.detail-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 28px; margin-bottom: 60px;
+}
+.detail-head { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
+.detail-actions { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
+.preview { background: var(--paper); border-radius: 14px; padding: 18px; }
+.preview-text {
+  white-space: pre-wrap; font-size: 14px; line-height: 1.65; color: var(--ink);
+  max-height: 260px; overflow: auto; margin: 8px 0 0;
+}
+.adapter-panel { margin-top: 18px; border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+.adapter-panel pre {
+  background: var(--paper); border-radius: 10px; padding: 14px; font-size: 12.5px;
+  overflow: auto; margin: 10px 0 0;
+}
+
+.field { display: block; margin-bottom: 16px; font-weight: 700; font-size: 14px; }
+.field input, .field textarea {
+  display: block; width: 100%; margin-top: 8px; font: inherit; font-weight: 400;
+  background: var(--paper); color: var(--ink);
+  border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px;
+}
+.field input:focus, .field textarea:focus { outline: 2px solid var(--teal); border-color: var(--teal); }
+.field textarea { resize: vertical; }
+.form-error { color: var(--coral); font-weight: 600; font-size: 14px; }
+.form-actions { display: flex; align-items: center; gap: 16px; margin-top: 6px; }
+
+.toast {
+  position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: var(--ink); color: var(--paper); padding: 12px 22px; border-radius: 999px;
+  font-size: 14px; font-weight: 600; opacity: 0; pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media (max-width: 640px) {
+  .page-head { padding-top: 28px; }
+  .detail-card { padding: 20px; }
+}

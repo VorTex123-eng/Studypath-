@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Delete your account · Studypath</title><meta name="description" content="Delete your Studypath account and data."><script>try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem("theme")||'"light"')}catch(e){}</script><link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png"><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#027d7a"><link rel="stylesheet" href="css/styles.css"></head>
+<body data-page="legal">
+<div class="shell" id="shell"></div>
+<main class="shell">
+<article class="legal">
+<h1>Delete your Studypath account</h1>
+<p class="meta">You can do this here even if you no longer have the app installed.</p>
+
+<h2>What gets deleted</h2>
+<ul>
+<li>Your account (email, name, password hash) and profile photo.</li>
+<li>All sign-in sessions on every device.</li>
+<li>Any problem reports you sent while signed in.</li>
+<li>All quiz history saved to your account, including questions, answers, scores and per-question records. This is removed by a background job within minutes.</li>
+</ul>
+<p>Deleting is permanent and cannot be undone. Data kept only in your browser on a device (for example, local quiz history) stays there until you clear your browser data or use Settings &rarr; Clear all local data in the app. Our providers may keep routine logs and backups for a limited time, as described in the <a href="privacy.html">Privacy Policy</a>.</p>
+
+<h2>Delete now</h2>
+<p>In the app: Settings &rarr; Delete account. Or enter your account email and password below. Signed in with Google and never set a Studypath password? Delete from Settings while signed in instead, leaving the password blank, because there is no Studypath password for that account.</p>
+<div class="panel" style="max-width:420px">
+<label class="field">Email<input type="email" id="delEmail" autocomplete="email" placeholder="you@example.com"></label>
+<label class="field" style="margin-top:14px">Password<input type="password" id="delPassword" autocomplete="current-password"></label>
+<label style="display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:15px"><input type="checkbox" id="delConfirm" style="margin-top:4px"> I understand my account and saved quiz history will be permanently deleted.</label>
+<div id="delStatus" role="alert"></div>
+<button id="delBtn" class="btn coral" style="width:100%">Delete my account</button>
+</div>
+
+<h2>Forgot your password?</h2>
+<p>Email <a data-contact-email href="mailto:obakpoloreghosa56@gmail.com">obakpoloreghosa56@gmail.com</a> from the address on the account and ask for it to be deleted. We may ask you to verify that the account is yours.</p>
+
+<h2>Using Studypath as a guest?</h2>
+<p>Guests have no account, so there is nothing to sign in to. Quiz results saved under a random device ID are not linked to your name or email. Use Settings &rarr; Clear all local data to remove what is on your device, or contact us if you want help with anything else.</p>
+</article>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('delBtn');
+  var status = document.getElementById('delStatus');
+  btn.onclick = function () {
+    var email = document.getElementById('delEmail').value.trim();
+    var pw = document.getElementById('delPassword').value;
+    if (!email || !pw) { status.textContent = 'Enter your email and password.'; return; }
+    if (!document.getElementById('delConfirm').checked) { status.textContent = 'Please tick the box to confirm.'; return; }
+    btn.disabled = true; status.style.color = 'var(--muted)'; status.textContent = 'Deleting…';
+    Auth.deleteAccountByCredentials(email, pw).then(function (res) {
+      if (res.ok) {
+        try { localStorage.removeItem('studypath:anonId'); } catch (e) {}
+        status.style.color = 'var(--teal)';
+        status.textContent = 'Your account has been deleted. Saved quiz history is being cleared now.';
+        document.getElementById('delPassword').value = '';
+      } else {
+        btn.disabled = false; status.style.color = '';
+        status.textContent = (res.error && res.error.message) || 'We couldn’t delete the account. Please check your connection and try again.';
+      }
+    });
+  };
+});
+</script>
+</main>
+<div class="toast" role="status" aria-live="polite"></div>
+<script src="js/site-config.js"></script>
+<script src="js/convex-config.js"></script>
+<script src="js/convex-client.js"></script>
+<script src="js/anon-id.js"></script>
+<script src="js/auth-client.js"></script>
+<script src="js/app.js"></script>
+</body></html>

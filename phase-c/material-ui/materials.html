@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Materials · Studypath (Phase C prototype)</title>
+<meta name="description" content="Phase C prototype: persistent material library. Demo data only — not wired into the Studypath app.">
+<script>try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem("theme")||'"light"')}catch(e){}</script>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="stylesheet" href="materials.css">
+</head>
+<body>
+<div class="demo-banner" role="note">
+  <strong>Phase C prototype.</strong>
+  Demo data only — this page is not connected to your account and not linked from the app.
+  <button id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
+</div>
+
+<header class="wrap page-head">
+  <div>
+    <p class="eyebrow">Phase C · Material Library</p>
+    <h1>My Materials</h1>
+    <p class="lede">Everything you study, saved. Pick a material to reuse it for a quiz — no re-uploading.</p>
+  </div>
+  <button class="btn" id="newMaterialBtn" type="button">+ Save new material</button>
+</header>
+
+<main class="wrap">
+  <section id="libraryView" aria-label="Saved materials">
+    <div class="lib-meta">
+      <span id="libCount" class="muted"></span>
+      <span class="muted mono" id="libQuota"></span>
+    </div>
+    <div class="grid" id="materialGrid"></div>
+    <div class="empty hidden" id="emptyState">
+      <p class="empty-title">No saved materials yet</p>
+      <p class="muted">Paste study text or save an extracted document to build your library.</p>
+      <button class="btn secondary" id="emptyCta" type="button">Save your first material</button>
+    </div>
+  </section>
+
+  <section id="detailView" class="hidden" aria-label="Material detail">
+    <button class="btn ghost back" id="backBtn" type="button">← All materials</button>
+    <div class="detail-card">
+      <div class="detail-head">
+        <div>
+          <p class="eyebrow" id="detailKind"></p>
+          <h2 id="detailTitle"></h2>
+          <p class="muted" id="detailMeta"></p>
+        </div>
+        <div class="detail-actions">
+          <button class="btn" id="useForQuizBtn" type="button">Use for quiz</button>
+          <button class="btn secondary" id="renameBtn" type="button">Rename</button>
+          <button class="btn danger" id="deleteBtn" type="button">Delete</button>
+        </div>
+      </div>
+      <div class="preview">
+        <p class="eyebrow">Text preview</p>
+        <p class="preview-text" id="detailPreview"></p>
+      </div>
+      <div class="adapter-panel hidden" id="adapterPanel">
+        <p class="eyebrow">Integration adapter output</p>
+        <p class="muted">This is what the Create Quiz adapter would hand to quiz generation. The text itself is resolved server-side — only the id and label travel with the request.</p>
+        <pre class="mono" id="adapterOutput"></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="createView" class="hidden" aria-label="Save new material">
+    <button class="btn ghost back" id="createBackBtn" type="button">← All materials</button>
+    <div class="detail-card">
+      <h2>Save new material</h2>
+      <p class="muted">Paste extracted text (the prototype skips file extraction; the real flow reuses the existing browser extraction, then saves the normalized text).</p>
+      <form id="createForm">
+        <label class="field">Title
+          <input id="fTitle" maxlength="120" placeholder="e.g. Biology Notes — Cell Division" required>
+        </label>
+        <label class="field">Subject <span class="muted">(optional)</span>
+          <input id="fSubject" maxlength="120" placeholder="e.g. Biology">
+        </label>
+        <label class="field">Text <span class="muted">(min 120 characters)</span>
+          <textarea id="fText" rows="10" placeholder="Paste the extracted study text here…" required></textarea>
+        </label>
+        <p class="form-error hidden" id="formError" role="alert"></p>
+        <div class="form-actions">
+          <button class="btn" type="submit">Save material</button>
+          <span class="muted mono" id="charCount"></span>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* Prototype bootstrap: loads the Phase C core (CommonJS, zero-dep) in the
+   browser without modifying it, then boots the UI. Serve this directory
+   over HTTP (e.g. `python3 -m http.server`) — file:// blocks fetch(). */
+(function () {
+  var order = ['material-types', 'material-validation', 'material-ownership',
+               'material-repo-memory', 'material-service', 'create-quiz-adapter'];
+  var cache = {};
+  function cjsRequire(path) {
+    var name = String(path).replace('./', '').replace('.js', '');
+    if (!cache[name]) throw new Error('Phase C: unknown module ' + path);
+    return cache[name];
+  }
+  function loadSeq(i) {
+    if (i >= order.length) {
+      window.PhaseC = cache;
+      var s = document.createElement('script');
+      s.src = 'materials.js';
+      document.body.appendChild(s);
+      return;
+    }
+    fetch('../' + order[i] + '.js').then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    }).then(function (src) {
+      var module = { exports: {} };
+      new Function('module', 'exports', 'require', src)(module, module.exports, cjsRequire);
+      cache[order[i]] = module.exports;
+      loadSeq(i + 1);
+    }).catch(function (err) {
+      document.getElementById('materialGrid').innerHTML =
+        '<p class="muted">Could not load the Phase C core (' + err.message +
+        '). Serve this folder over HTTP and reload.</p>';
+    });
+  }
+  loadSeq(0);
+})();
+</script>
+</body>
+</html>

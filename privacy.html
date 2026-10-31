@@ -1,0 +1,94 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Privacy Policy · Studypath</title><meta name="description" content="How Studypath handles your data."><script>try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem("theme")||'"light"')}catch(e){}</script><link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png"><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#027d7a"><link rel="stylesheet" href="css/styles.css"></head>
+<body data-page="legal">
+<div class="shell" id="shell"></div>
+<main class="shell">
+<article class="legal">
+<h1>Privacy Policy</h1>
+<p class="meta">Last updated: 29 October 2026</p>
+<p>Studypath is built by Vortex. Studypath turns study material you provide into quizzes, and tracks how you do. This page explains what data Studypath handles, why, who else receives it, and how you can delete it. It describes how the app actually works today.</p>
+
+<h2>What we collect</h2>
+<ul>
+<li><b>Account details (only if you create an account):</b> your email address, display name, and password. The password is never stored as-is; only a salted, one-way hash is kept. You can also add an optional profile photo.</li>
+<li><b>Study material you provide:</b> text you paste, or text extracted <i>in your browser</i> from a PDF, DOCX or TXT file. The original file is not uploaded to us. If you are signed in, you can also choose <b>Save to library</b>: the extracted text is then stored on our servers as one of your saved materials (up to 20), visible only to your account, so you can reuse it for future quizzes.</li>
+<li><b>Quiz activity:</b> the questions in each quiz you complete, your answers, scores, timing, topic performance, and the quiz title, subject and source label. For signed-in accounts we also keep a compact per-question record (the topic, the quiz mode and difficulty, and whether you answered correctly, incorrectly or skipped) so your progress can be worked out quickly.</li>
+<li><b>An anonymous device ID:</b> a random ID generated in your browser so quiz results can be saved even if you never create an account. It is not linked to your name or email unless you sign up and choose to claim that history.</li>
+<li><b>Sign-in session:</b> a token stored in your browser while you are signed in (valid for up to 30 days, or until you sign out).</li>
+<li><b>Age confirmation:</b> whether you have confirmed you are 18 or older (yes/no/unset). Studypath's AI features use Google's Gemini API, whose terms require users to be 18+. We store only this confirmation, not your date of birth or any identity document.</li>
+<li><b>Password reset requests:</b> if you use "Forgot password", we store a one-way hash of a single-use reset token (the token itself is only in the email we send you) plus when it expires. Used or expired tokens are invalidated. We never put your password in an email.</li>
+<li><b>Problem reports:</b> if you use &ldquo;Report a problem&rdquo; on a question, we receive the question text, its topic, the reason you chose and any note you write. If you are signed in, the report is linked to your account; if not, it is not linked to any identity.</li>
+<li><b>Preferences</b> (theme, reminders, reduced motion) are stored only in your browser.</li>
+<li><b>Technical data:</b> like most websites, our hosting and backend providers process standard connection data such as IP address and browser type when you use the app. We do not run advertising or analytics trackers.</li>
+</ul>
+
+<h2>How we use it</h2>
+<ul>
+<li>To run the app: create your account, generate quizzes, save results, keep your saved-material library, and show your history and progress.</li>
+<li>To generate quiz questions from your material using AI (see below).</li>
+<li>To review problems you report with AI-written questions and improve quiz quality.</li>
+<li>To keep the service safe and fair: for example, limiting how many quizzes, sign-ins or uploads can happen in a short time.</li>
+</ul>
+<p>We do not sell your data and we do not use it for advertising.</p>
+
+<h2>AI processing of your material</h2>
+<p>When you generate a quiz from your own material, the text of that material, plus the options you chose (such as difficulty, number of questions, topics and any instructions you typed), is sent from our server to Google&rsquo;s Gemini API, which writes the questions. If you are signed in, the names of topics from your earlier quizzes may be included with the request so that new questions reuse your existing topic names. Google handles that data under its own terms and privacy policy for the Gemini API.</p>
+<p id="geminiPlanNote"><b>Free Gemini plan.</b> Studypath currently uses Google&rsquo;s free Gemini API tier. Under Google&rsquo;s terms for that tier, Google may use the text we send and the questions it returns to improve its products and machine-learning technologies, and people at Google may review it. Please do not upload material that is private, confidential, or that contains personal information about other people. If we move to Google&rsquo;s paid tier, under which Google does not use this data to improve its products, this section will be updated.</p>
+<p>Material you do <i>not</i> save is never stored on our servers. But please note: generating an AI quiz from it still sends that text to our server, which forwards it to Google&rsquo;s Gemini API so the questions can be written &mdash; this is true for guests as well as signed-in users. The text is used for that one request and is not kept afterwards. If you do save study material to your library while signed in, we keep that text in our database, linked to your account, so you can reuse it for future quizzes. Saved materials are visible only to you; you can rename or delete them at any time from My Materials, and deleting your account deletes them too.</p>
+<p>The generated questions are saved with your quiz results, and they may quote or paraphrase your material.</p>
+<p>Quizzes built from the app&rsquo;s built-in sample topics, and flashcards made from your own material, are created in your browser and are not sent to an AI service.</p>
+<p>AI-written questions can be wrong or misleading. Please check important facts against your original sources.</p>
+
+<h2>Who else handles data</h2>
+<ul>
+<li><b>Convex</b> &mdash; our database, file storage (profile photos) and server functions. Our deployment runs in the EU (Ireland).</li>
+<li><b>Google (Gemini API)</b> &mdash; quiz generation, as described above, and the AI Tutor: when you ask the Tutor a question, your question and the relevant excerpts of the saved material you are tutoring from are sent to Google&rsquo;s Gemini API so it can answer. Tutor conversations are saved to your account so you can continue them later.</li>
+<li><b>Vercel</b> &mdash; hosts the website.</li>
+<li><b>Content delivery networks and fonts</b> &mdash; the app loads open-source libraries (for PDF/Word reading and maths display) from jsDelivr, unpkg and cdnjs, fonts from Google Fonts, and home-page photos from Unsplash. These services can see your IP address when your browser fetches those files.</li>
+</ul>
+
+<h2>How long we keep it</h2>
+<ul>
+<li>Account details, profile photo, quiz history, per-question records, saved study materials and any problem reports linked to your account are kept until you delete your account.</li>
+<li>Sign-in sessions expire after 30 days.</li>
+<li>Quiz results saved under an anonymous device ID stay until that data is removed; clearing your browser data removes the ID from your device but not the copy on our servers.</li>
+<li>Small technical counters used to limit abuse contain only an internal identifier and a count, never your study content.</li>
+<li>Our providers may keep routine logs and backups for a limited period under their own practices.</li>
+</ul>
+
+<h2>Deleting your data</h2>
+<p>You can delete your account and its data at any time, in the app (Settings &rarr; Delete account) or on the web at <a href="delete-account.html">delete-account.html</a>, including if you have uninstalled the app. Deleting removes your account, profile, photo, sign-in sessions, problem reports, per-question records, saved study materials and saved quiz history from our servers; quiz history is cleared by a background job within minutes. You can also use &ldquo;Clear all local data&rdquo; in Settings to erase what is stored in your browser.</p>
+
+<h2>Your choices and rights</h2>
+<p>You can change your display name and photo in Settings, download the data stored in your browser (Settings &rarr; Download my data), and delete your account as above. Depending on where you live, you may have further rights over your personal data, such as access, correction or objection; contact us and we will help.</p>
+
+<h2>Security</h2>
+<p>Connections use HTTPS, passwords are stored only as salted hashes, sign-in and account actions are rate limited, and the AI provider key is kept on the server, never in your browser. No system is perfectly secure, so please use a strong, unique password.</p>
+
+<h2>Children</h2>
+<p>Studypath is not directed at children under 13, and we do not knowingly collect their data. If you are under the age of digital consent in your country, please use Studypath with a parent&rsquo;s or guardian&rsquo;s permission. If you believe a child has created an account without permission, contact us and we will delete it.</p>
+<p><b>What the 18+ rule actually covers:</b> the 18+ confirmation is for AI features only, because Google&rsquo;s Gemini API requires users to be 18+. It is not a rule that only adults may use Studypath. You do not need to be 18 to use Studypath as a guest for sample quizzes and flashcards, which are made in your browser and do not use AI. You do need to confirm you are 18 or older to create an account and to use AI quiz generation and the Tutor.</p>
+
+<h2>Changes</h2>
+<p>If this policy changes in a meaningful way we will update the date above and, where appropriate, tell you in the app.</p>
+
+<h2>Contact</h2>
+<p>Questions or requests about your data: <a data-contact-email href="mailto:obakpoloreghosa56@gmail.com">obakpoloreghosa56@gmail.com</a>.</p>
+</article>
+</main>
+<div class="toast" role="status" aria-live="polite"></div>
+<script src="js/site-config.js"></script>
+<script src="js/app.js"></script>
+<script>
+// Gemini plan disclosure: the free-tier paragraph (#geminiPlanNote) is the
+// static default, present even with JavaScript disabled. On the paid tier
+// it is replaced with the paid wording.
+(function () {
+  try {
+    if (window.STUDYPATH_SITE && window.STUDYPATH_SITE.geminiPlan === 'paid') {
+      var el = document.getElementById('geminiPlanNote');
+      if (el) el.innerHTML = "<b>Paid Gemini plan.</b> Studypath uses Google\u2019s paid Gemini API tier. Under Google\u2019s terms for that tier, Google does not use the text we send, or the questions it returns, to improve its products.";
+    }
+  } catch (e) {}
+})();
+</script>
+</body></html>

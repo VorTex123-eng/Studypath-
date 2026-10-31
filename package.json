@@ -1,0 +1,16 @@
+{
+  "name": "studypath-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Convex backend for Studypath (M11). The frontend itself remains a static, build-step-free multi-page app - this package.json exists only so the Convex CLI has a project to run against.",
+  "scripts": {
+    "convex:dev": "convex dev",
+    "convex:deploy": "convex deploy"
+  },
+  "dependencies": {
+    "convex": "^1.16.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
